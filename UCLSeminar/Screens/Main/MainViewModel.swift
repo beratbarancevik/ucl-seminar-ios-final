@@ -14,7 +14,9 @@ final class MainViewModel: MainViewModelProtocol {
     }
 
     func bind() {
-
+        stocksService.getStocks { stocks in
+            
+        }
     }
 
 }

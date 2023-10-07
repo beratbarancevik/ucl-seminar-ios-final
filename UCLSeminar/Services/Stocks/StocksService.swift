@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class StocksService: StockServiceProtocol {
 
@@ -15,15 +16,29 @@ final class StocksService: StockServiceProtocol {
         self.db = db
     }
 
-    func getStocks() {
+    func getStocks(completionHandler: @escaping ([Stock]) -> Void) {
         db.collection("stocks").getDocuments { snapshot, error in
-
+            do {
+                guard let stocks = try snapshot?.documents.map({ try $0.data(as: Stock.self) }) else {
+                    return
+                }
+                completionHandler(stocks)
+            } catch {
+                print("Decoding error")
+            }
         }
     }
     
-    func getStockDetails(stockID: String) {
+    func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void) {
         db.collection("stocks").document(stockID).getDocument { snapshot, error in
-
+            do {
+                guard let stock = try snapshot?.data(as: Stock.self) else {
+                    return
+                }
+                completionHandler(stock)
+            } catch {
+                print("Decoding error")
+            }
         }
     }
 
@@ -31,7 +46,7 @@ final class StocksService: StockServiceProtocol {
 
 protocol StockServiceProtocol {
 
-    func getStocks()
-    func getStockDetails(stockID: String)
+    func getStocks(completionHandler: @escaping ([Stock]) -> Void)
+    func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void)
 
 }

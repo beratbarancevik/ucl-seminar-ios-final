@@ -12,6 +12,9 @@
 		F478DB0F2AD1BBDE0042FB58 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F478DB0E2AD1BBDE0042FB58 /* FirebaseAnalytics */; };
 		F478DB112AD1BBDE0042FB58 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F478DB102AD1BBDE0042FB58 /* FirebaseFirestore */; };
 		F478DB132AD1BBFD0042FB58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F478DB122AD1BBFD0042FB58 /* GoogleService-Info.plist */; };
+		F478DB162AD1E88D0042FB58 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478DB152AD1E88D0042FB58 /* Stock.swift */; };
+		F478DB182AD1E9C70042FB58 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F478DB172AD1E9C70042FB58 /* FirebaseFirestoreSwift */; };
+		F478DB1B2AD1ECB60042FB58 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478DB1A2AD1ECB60042FB58 /* StockCell.swift */; };
 		F4C9A9A82AD1A4C00066B550 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9A72AD1A4C00066B550 /* AppDelegate.swift */; };
 		F4C9A9AA2AD1A4C00066B550 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9A92AD1A4C00066B550 /* SceneDelegate.swift */; };
 		F4C9A9AC2AD1A4C00066B550 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9AB2AD1A4C00066B550 /* MainViewController.swift */; };
@@ -43,6 +46,8 @@
 		F478DB052AD1B9BC0042FB58 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F478DB0B2AD1BA870042FB58 /* StocksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksService.swift; sourceTree = "<group>"; };
 		F478DB122AD1BBFD0042FB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F478DB152AD1E88D0042FB58 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		F478DB1A2AD1ECB60042FB58 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		F4C9A9A42AD1A4C00066B550 /* UCLSeminar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLSeminar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C9A9A72AD1A4C00066B550 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4C9A9A92AD1A4C00066B550 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 			files = (
 				F478DB0F2AD1BBDE0042FB58 /* FirebaseAnalytics in Frameworks */,
 				F478DB112AD1BBDE0042FB58 /* FirebaseFirestore in Frameworks */,
+				F478DB182AD1E9C70042FB58 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +102,7 @@
 		F478DB042AD1B9AC0042FB58 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F478DB192AD1EC9E0042FB58 /* Views */,
 				F4C9A9AB2AD1A4C00066B550 /* MainViewController.swift */,
 				F478DB052AD1B9BC0042FB58 /* MainViewModel.swift */,
 			);
@@ -134,8 +141,25 @@
 			isa = PBXGroup;
 			children = (
 				F478DB0B2AD1BA870042FB58 /* StocksService.swift */,
+				F478DB142AD1E8860042FB58 /* Models */,
 			);
 			path = Stocks;
+			sourceTree = "<group>";
+		};
+		F478DB142AD1E8860042FB58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F478DB152AD1E88D0042FB58 /* Stock.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F478DB192AD1EC9E0042FB58 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F478DB1A2AD1ECB60042FB58 /* StockCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F4C9A99B2AD1A4C00066B550 = {
@@ -204,6 +228,7 @@
 			packageProductDependencies = (
 				F478DB0E2AD1BBDE0042FB58 /* FirebaseAnalytics */,
 				F478DB102AD1BBDE0042FB58 /* FirebaseFirestore */,
+				F478DB172AD1E9C70042FB58 /* FirebaseFirestoreSwift */,
 			);
 			productName = UCLSeminar;
 			productReference = F4C9A9A42AD1A4C00066B550 /* UCLSeminar.app */;
@@ -325,6 +350,8 @@
 			files = (
 				F4C9A9AC2AD1A4C00066B550 /* MainViewController.swift in Sources */,
 				F4C9A9A82AD1A4C00066B550 /* AppDelegate.swift in Sources */,
+				F478DB1B2AD1ECB60042FB58 /* StockCell.swift in Sources */,
+				F478DB162AD1E88D0042FB58 /* Stock.swift in Sources */,
 				F478DB0C2AD1BA870042FB58 /* StocksService.swift in Sources */,
 				F4C9A9AA2AD1A4C00066B550 /* SceneDelegate.swift in Sources */,
 				F478DB062AD1B9BC0042FB58 /* MainViewModel.swift in Sources */,
@@ -704,6 +731,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F478DB0D2AD1BBDE0042FB58 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		F478DB172AD1E9C70042FB58 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F478DB0D2AD1BBDE0042FB58 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
