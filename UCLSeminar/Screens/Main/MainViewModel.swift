@@ -20,7 +20,7 @@ final class MainViewModel: MainViewModelProtocol {
                     return StockCell.ViewState(
                         id: id,
                         title: $0.title,
-                        iconName: $0.isFavorite ? "star.fill" : "star"
+                        iconName: $0.favorite ? "star.fill" : "star"
                     )
                 }
                 return nil

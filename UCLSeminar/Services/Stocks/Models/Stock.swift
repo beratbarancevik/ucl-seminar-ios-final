@@ -14,6 +14,6 @@ struct Stock: Codable {
     let symbol: String
     let price: Double
     let logoUrl: String
-    let isFavorite: Bool
+    let favorite: Bool
 
 }

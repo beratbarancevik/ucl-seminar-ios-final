@@ -27,7 +27,7 @@ final class DetailViewModel: DetailViewModelProtocol {
                     symbol: stock.symbol,
                     price: "\(stock.price)",
                     priceColor: stock.price >= self?.stock?.price ?? 0 ? .green : .red,
-                    favoriteButtonTitle: stock.isFavorite ? "Remove from Favourites" : "Add to Favourites",
+                    favoriteButtonTitle: stock.favorite ? "Remove from Favourites" : "Add to Favourites",
                     imageUrl: URL(string: stock.logoUrl)!
                 )
             )
@@ -37,7 +37,7 @@ final class DetailViewModel: DetailViewModelProtocol {
     }
 
     func favoriteAction() {
-        stocksService.updateStockDetail(stockID: stockID, isFavorite: !(stock?.isFavorite ?? true))
+        stocksService.updateStockDetail(stockID: stockID, isFavorite: !(stock?.favorite ?? true))
     }
 
 }
