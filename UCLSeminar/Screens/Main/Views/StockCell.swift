@@ -13,7 +13,18 @@ final class StockCell: UITableViewCell {
         let title: String
     }
 
-    private let titleLabel = UILabel()
+    static let reuseIdentifier = "stock-cell"
+
+    private let titleLabel: UILabel = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    private let starImageView: UIImageView = {
+        $0.image = .init(systemName: "star")
+        $0.tintColor = .label
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIImageView())
 
     var viewState: ViewState? {
         didSet {
@@ -25,13 +36,20 @@ final class StockCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         addSubview(titleLabel)
+        addSubview(starImageView)
 
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            titleLabel.trailingAnchor.constraint(equalTo: starImageView.leadingAnchor, constant: 16),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            starImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            starImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            starImageView.heightAnchor.constraint(equalToConstant: 24),
+            starImageView.widthAnchor.constraint(equalToConstant: 24)
         ])
     }
     

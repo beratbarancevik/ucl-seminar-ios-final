@@ -15,6 +15,7 @@
 		F478DB162AD1E88D0042FB58 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478DB152AD1E88D0042FB58 /* Stock.swift */; };
 		F478DB182AD1E9C70042FB58 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F478DB172AD1E9C70042FB58 /* FirebaseFirestoreSwift */; };
 		F478DB1B2AD1ECB60042FB58 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478DB1A2AD1ECB60042FB58 /* StockCell.swift */; };
+		F49EE8982AD29D1C0018325B /* MainViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EE8972AD29D1C0018325B /* MainViewState.swift */; };
 		F4C9A9A82AD1A4C00066B550 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9A72AD1A4C00066B550 /* AppDelegate.swift */; };
 		F4C9A9AA2AD1A4C00066B550 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9A92AD1A4C00066B550 /* SceneDelegate.swift */; };
 		F4C9A9AC2AD1A4C00066B550 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9A9AB2AD1A4C00066B550 /* MainViewController.swift */; };
@@ -48,6 +49,7 @@
 		F478DB122AD1BBFD0042FB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F478DB152AD1E88D0042FB58 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		F478DB1A2AD1ECB60042FB58 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		F49EE8972AD29D1C0018325B /* MainViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewState.swift; sourceTree = "<group>"; };
 		F4C9A9A42AD1A4C00066B550 /* UCLSeminar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLSeminar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C9A9A72AD1A4C00066B550 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4C9A9A92AD1A4C00066B550 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,9 +104,10 @@
 		F478DB042AD1B9AC0042FB58 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F478DB192AD1EC9E0042FB58 /* Views */,
 				F4C9A9AB2AD1A4C00066B550 /* MainViewController.swift */,
 				F478DB052AD1B9BC0042FB58 /* MainViewModel.swift */,
+				F49EE8972AD29D1C0018325B /* MainViewState.swift */,
+				F478DB192AD1EC9E0042FB58 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				F478DB0C2AD1BA870042FB58 /* StocksService.swift in Sources */,
 				F4C9A9AA2AD1A4C00066B550 /* SceneDelegate.swift in Sources */,
 				F478DB062AD1B9BC0042FB58 /* MainViewModel.swift in Sources */,
+				F49EE8982AD29D1C0018325B /* MainViewState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

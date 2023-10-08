@@ -6,18 +6,23 @@
 //
 
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 final class StocksService: StockServiceProtocol {
 
     private let db: Firestore
 
+    private var listeners: [ListenerRegistration] = []
+
     init(db: Firestore = Firestore.firestore()) {
         self.db = db
     }
 
+    deinit {
+        listeners.forEach { $0.remove() }
+    }
+
     func getStocks(completionHandler: @escaping ([Stock]) -> Void) {
-        db.collection("stocks").getDocuments { snapshot, error in
+        let listener = db.collection("stocks").addSnapshotListener { snapshot, error in
             do {
                 guard let stocks = try snapshot?.documents.map({ try $0.data(as: Stock.self) }) else {
                     return
@@ -27,6 +32,7 @@ final class StocksService: StockServiceProtocol {
                 print("Decoding error")
             }
         }
+        listeners.append(listener)
     }
     
     func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void) {

@@ -11,15 +11,22 @@ class MainViewController: UIViewController {
 
     private let viewModel = MainViewModel(stocksService: StocksService())
 
+    private var stockRows: [StockCell.ViewState] = []
+
     private let tableView: UITableView = {
         $0.backgroundColor = .systemBackground
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.register(StockCell.self, forCellReuseIdentifier: "stock-cell")
+        $0.register(StockCell.self, forCellReuseIdentifier: StockCell.reuseIdentifier)
         return $0
     }(UITableView())
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Stocks"
+
+        view.backgroundColor = .systemBackground
 
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -32,7 +39,10 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        viewModel.bind()
+        viewModel.bind(viewStateHandler: { viewState in
+            self.stockRows = viewState.rows
+            self.tableView.reloadData()
+        })
     }
 
 }
@@ -40,14 +50,16 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        stockRows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let stockCell = tableView.dequeueReusableCell(withIdentifier: "stock-cell") as? StockCell else {
+        guard let stockCell = tableView.dequeueReusableCell(
+            withIdentifier: StockCell.reuseIdentifier
+        ) as? StockCell else {
             return UITableViewCell()
         }
-        stockCell.viewState = .init(title: "JP Morgan")
+        stockCell.viewState = stockRows[indexPath.row]
         return stockCell
     }
 

@@ -7,20 +7,24 @@
 
 final class MainViewModel: MainViewModelProtocol {
 
+//    var viewState: ((MainViewState) -> Void)?
+
     private let stocksService: StockServiceProtocol
 
     init(stocksService: StockServiceProtocol) {
         self.stocksService = stocksService
     }
 
-    func bind() {
+    func bind(viewStateHandler: @escaping (MainViewState) -> Void) {
         stocksService.getStocks { stocks in
-            
+            viewStateHandler(.init(rows: stocks.map { StockCell.ViewState(title: $0.title) }))
         }
     }
 
 }
 
 protocol MainViewModelProtocol {
-    func bind()
+
+    func bind(viewStateHandler: @escaping (MainViewState) -> Void)
+
 }
