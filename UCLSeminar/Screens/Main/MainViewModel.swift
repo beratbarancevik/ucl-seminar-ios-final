@@ -15,11 +15,20 @@ final class MainViewModel: MainViewModelProtocol {
 
     func bind(viewStateHandler: @escaping (MainViewState) -> Void) {
         stocksService.getStocks { stocks in
-            viewStateHandler(.init(rows: stocks.map { StockCell.ViewState(title: $0.title) }))
+            viewStateHandler(.init(rows: stocks.compactMap {
+                if let id = $0.id {
+                    return StockCell.ViewState(
+                        id: id,
+                        title: $0.title,
+                        iconName: $0.isFavorite ? "star.fill" : "star"
+                    )
+                }
+                return nil
+            }))
         }
     }
 
-    func uploadStocks() {
+    func uploadAction() {
         stocksService.uploadStocks()
     }
 
@@ -28,6 +37,6 @@ final class MainViewModel: MainViewModelProtocol {
 protocol MainViewModelProtocol {
 
     func bind(viewStateHandler: @escaping (MainViewState) -> Void)
-    func uploadStocks()
+    func uploadAction()
 
 }

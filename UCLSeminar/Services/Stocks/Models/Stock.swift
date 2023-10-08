@@ -11,6 +11,9 @@ struct Stock: Codable {
 
     @DocumentID var id: String?
     let title: String
+    let symbol: String
+    let price: Double
     let logoUrl: String
+    let isFavorite: Bool
 
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 import FirebaseCore
+import Kingfisher
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

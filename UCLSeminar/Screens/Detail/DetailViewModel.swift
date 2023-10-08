@@ -5,8 +5,46 @@
 //  Created by Berat Cevik on 08/10/2023.
 //
 
-final class DetailViewModel {
+import Foundation
 
+final class DetailViewModel: DetailViewModelProtocol {
 
+    private let stockID: String
+    private let stocksService: StockServiceProtocol
+
+    private var stock: Stock?
+
+    init(stockID: String, stocksService: StockServiceProtocol) {
+        self.stockID = stockID
+        self.stocksService = stocksService
+    }
+
+    func bind(viewStateHandler: @escaping (DetailViewState) -> Void) {
+        stocksService.getStockDetails(stockID: stockID) { [weak self] stock in
+            viewStateHandler(
+                .init(
+                    title: stock.title,
+                    symbol: stock.symbol,
+                    price: "\(stock.price)",
+                    priceColor: stock.price >= self?.stock?.price ?? 0 ? .green : .red,
+                    favoriteButtonTitle: stock.isFavorite ? "Remove from Favourites" : "Add to Favourites",
+                    imageUrl: URL(string: stock.logoUrl)!
+                )
+            )
+
+            self?.stock = stock
+        }
+    }
+
+    func favoriteAction() {
+        stocksService.updateStockDetail(stockID: stockID, isFavorite: !(stock?.isFavorite ?? true))
+    }
+
+}
+
+protocol DetailViewModelProtocol {
+
+    func bind(viewStateHandler: @escaping (DetailViewState) -> Void)
+    func favoriteAction()
 
 }

@@ -9,7 +9,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
-    private let viewModel = MainViewModel(stocksService: StocksService())
+    private let viewModel: MainViewModelProtocol
 
     private var stockRows: [StockCell.ViewState] = []
 
@@ -20,6 +20,16 @@ final class MainViewController: UIViewController {
         return $0
     }(UITableView())
 
+    init() {
+        viewModel = MainViewModel(stocksService: StocksService())
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +39,7 @@ final class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         stockRows.count
@@ -45,8 +55,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return stockCell
     }
 
+}
+
+extension MainViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(
+            DetailViewController(stockID: stockRows[indexPath.row].id),
+            animated: true
+        )
     }
 
 }
@@ -88,7 +106,7 @@ private extension MainViewController {
 
     @objc 
     func uploadDidTap() {
-        viewModel.uploadStocks()
+        viewModel.uploadAction()
     }
 
 }

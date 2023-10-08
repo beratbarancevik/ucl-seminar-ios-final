@@ -10,7 +10,9 @@ import UIKit
 final class StockCell: UITableViewCell {
 
     struct ViewState {
+        let id: String
         let title: String
+        let iconName: String
     }
 
     static let reuseIdentifier = "stock-cell"
@@ -19,8 +21,7 @@ final class StockCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UILabel())
-    private let starImageView: UIImageView = {
-        $0.image = .init(systemName: "star")
+    private let iconImageView: UIImageView = {
         $0.tintColor = .label
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -28,7 +29,10 @@ final class StockCell: UITableViewCell {
 
     var viewState: ViewState? {
         didSet {
-            titleLabel.text = viewState?.title
+            if let viewState {
+                titleLabel.text = viewState.title
+                iconImageView.image = UIImage(systemName: viewState.iconName)
+            }
         }
     }
 
@@ -36,20 +40,20 @@ final class StockCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         addSubview(titleLabel)
-        addSubview(starImageView)
+        addSubview(iconImageView)
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: starImageView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: iconImageView.leadingAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
 
         NSLayoutConstraint.activate([
-            starImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            starImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            starImageView.heightAnchor.constraint(equalToConstant: 24),
-            starImageView.widthAnchor.constraint(equalToConstant: 24)
+            iconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconImageView.heightAnchor.constraint(equalToConstant: 24),
+            iconImageView.widthAnchor.constraint(equalToConstant: 24)
         ])
     }
     
