@@ -36,7 +36,7 @@ final class StocksService: StockServiceProtocol {
     }
 
     func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void) {
-        db.collection("stocks").document(stockID).getDocument { snapshot, error in
+        let listener = db.collection("stocks").document(stockID).addSnapshotListener { snapshot, error in
             do {
                 guard let stock = try snapshot?.data(as: Stock.self) else {
                     return
@@ -46,6 +46,7 @@ final class StocksService: StockServiceProtocol {
                 print("Decoding error")
             }
         }
+        listeners.append(listener)
     }
 
     func uploadStocks() {

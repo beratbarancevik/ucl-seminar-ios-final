@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     private let viewModel = MainViewModel(stocksService: StocksService())
 
@@ -23,37 +23,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Stocks"
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: .init(systemName: "square.and.arrow.up"),
-            style: .done,
-            target: self,
-            action: #selector(uploadDidTap)
-        )
-
-        view.backgroundColor = .systemBackground
-
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-
-        tableView.dataSource = self
-        tableView.delegate = self
-
-        viewModel.bind(viewStateHandler: { viewState in
-            self.stockRows = viewState.rows
-            self.tableView.reloadData()
-        })
-    }
-
-    @objc private func uploadDidTap() {
-        viewModel.uploadStocks()
+        configureViews()
+        configureBindings()
     }
 
 }
@@ -76,6 +47,48 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+}
+
+
+private extension MainViewController {
+
+    func configureViews() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Stocks"
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .init(systemName: "square.and.arrow.up"),
+            style: .done,
+            target: self,
+            action: #selector(uploadDidTap)
+        )
+
+        view.backgroundColor = .systemBackground
+
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
+    func configureBindings() {
+        viewModel.bind(viewStateHandler: { [weak self] viewState in
+            self?.stockRows = viewState.rows
+            self?.tableView.reloadData()
+        })
+    }
+
+    @objc 
+    func uploadDidTap() {
+        viewModel.uploadStocks()
     }
 
 }
