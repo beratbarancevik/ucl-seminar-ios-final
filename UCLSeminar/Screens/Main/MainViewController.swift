@@ -26,6 +26,13 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Stocks"
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .init(systemName: "square.and.arrow.up"),
+            style: .done,
+            target: self,
+            action: #selector(uploadDidTap)
+        )
+
         view.backgroundColor = .systemBackground
 
         view.addSubview(tableView)
@@ -43,6 +50,10 @@ class MainViewController: UIViewController {
             self.stockRows = viewState.rows
             self.tableView.reloadData()
         })
+    }
+
+    @objc private func uploadDidTap() {
+        viewModel.uploadStocks()
     }
 
 }

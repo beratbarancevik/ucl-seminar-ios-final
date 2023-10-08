@@ -7,7 +7,7 @@
 
 import FirebaseFirestoreSwift
 
-struct Stock: Decodable {
+struct Stock: Codable {
 
     @DocumentID var id: String?
     let title: String

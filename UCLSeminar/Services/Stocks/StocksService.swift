@@ -34,7 +34,7 @@ final class StocksService: StockServiceProtocol {
         }
         listeners.append(listener)
     }
-    
+
     func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void) {
         db.collection("stocks").document(stockID).getDocument { snapshot, error in
             do {
@@ -48,11 +48,29 @@ final class StocksService: StockServiceProtocol {
         }
     }
 
+    func uploadStocks() {
+        var stocks: [Stock] = [
+            .init(id: "id-1", title: "Tesla", logoUrl: "https://oceansquare.com/wp-content/uploads/2018/04/tesla-logo-500.jpg"),
+            .init(id: "id-2", title: "Apple", logoUrl: "https://i.pinimg.com/474x/b0/d2/6e/b0d26e8122dffa8a51081f7f814581d7.jpg"),
+            .init(id: "id-3", title: "Meta", logoUrl: "https://img.freepik.com/premium-vector/meta-company-logo_265339-667.jpg"),
+        ]
+        stocks.forEach {
+            do {
+                try db.collection("stocks").document($0.id!).setData(from: $0) { error in
+                    if let error { print("Failed to upload stock: \(error)") }
+                }
+            } catch {
+                print("Encoding error")
+            }
+        }
+    }
+
 }
 
 protocol StockServiceProtocol {
 
     func getStocks(completionHandler: @escaping ([Stock]) -> Void)
     func getStockDetails(stockID: String, completionHandler: @escaping (Stock) -> Void)
+    func uploadStocks()
 
 }

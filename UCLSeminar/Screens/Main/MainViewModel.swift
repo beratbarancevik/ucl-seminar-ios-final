@@ -7,8 +7,6 @@
 
 final class MainViewModel: MainViewModelProtocol {
 
-//    var viewState: ((MainViewState) -> Void)?
-
     private let stocksService: StockServiceProtocol
 
     init(stocksService: StockServiceProtocol) {
@@ -21,10 +19,15 @@ final class MainViewModel: MainViewModelProtocol {
         }
     }
 
+    func uploadStocks() {
+        stocksService.uploadStocks()
+    }
+
 }
 
 protocol MainViewModelProtocol {
 
     func bind(viewStateHandler: @escaping (MainViewState) -> Void)
+    func uploadStocks()
 
 }
